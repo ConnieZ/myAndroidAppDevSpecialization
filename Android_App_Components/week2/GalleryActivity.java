@@ -120,7 +120,7 @@ public class GalleryActivity
         if(validateInput(uris)){
             return uris;
         } else {
-            return new ArrayList<Uri>();
+            return null;
         }
 		
     }
@@ -152,14 +152,14 @@ public class GalleryActivity
 		if(inputUrls == null){
             ViewUtils.showToast(this, R.string.input_url_list_is_null);
             Log.d(TAG, "inside validateInput - inputIrls = null");
-
+            return false;
         } else if(inputUrls.size()==0){
             ViewUtils.showToast(this, R.string.input_url_list_is_empty);
             Log.d(TAG, "inside validateInput - inputIrls empty");
-
+            return false;
         } else {
             for(Uri url : inputUrls){
-                if(UriUtils.isValidUrl(url.toString())){
+                if(!UriUtils.isValidUrl(url.toString())){
                     ViewUtils.showToast(this, R.string.invalid_image_url_input);
 
                     Log.d(TAG, "inside validateInput - invalid inputUrl");
